@@ -3,20 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOC26CS58S553405994.pdf</title> <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background-color: #525659; /* Official Chrome PDF Viewer gray */ display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
-        
-        .pdf-container { margin: 20px 0; display: flex; justify-content: center; width: 100%; }
+    <title>NOC26CS58S65340861603164982.pdf</title>
+    <style>
+        /* PDF Viewer Styling */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            background-color: #525659; /* Chrome PDF dark gray */
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            overflow: hidden; /* Prevents double scrollbars */
+        }
 
-        img { width: 95%; max-width: 900px; /* Standard A4 width on desktop */ height: auto; box-shadow: 0 0 15px rgba(0,0,0,0.5); border: 1px solid #000; background: white; }
+        /* Mock Chrome PDF Top Bar */
+        .pdf-header {
+            height: 48px;
+            background-color: #323639;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            z-index: 100;
+        }
 
-        /* Hides scrollbars for a cleaner look on mobile */
-        ::-webkit-scrollbar { display: none; }
+        .file-info { font-size: 14px; display: flex; align-items: center; gap: 15px; }
+        .controls { display: flex; align-items: center; gap: 20px; font-size: 13px; color: #bdc1c6; }
+
+        /* Certificate Container */
+        .viewport {
+            height: calc(100vh - 48px);
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0; /* Space at top/bottom of the "paper" only */
+        }
+
+        img {
+            width: 95%;
+            max-width: 850px; /* Standard PDF width */
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            display: block;
+        }
+
+        /* Hide scrollbar for a cleaner mobile look */
+        .viewport::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
 <body>
-    <div class="pdf-container">
-        <img src="preview%201.jpeg" alt="e-Certificate">
+
+    <div class="pdf-header">
+        <div class="file-info">
+            <span style="font-size: 18px;">☰</span>
+            <span>NOC26CS58S65340861603164982.pdf</span>
+        </div>
+        <div class="controls">
+            <span>1 / 1</span>
+            <span>| — 100% + |</span>
+            <span>⟳ ⬇ ⎙</span>
+        </div>
     </div>
+
+    <div class="viewport">
+        <img src="preview%201.jpeg" alt="Certificate">
+    </div>
+
 </body>
 </html>
