@@ -5,85 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOC26CS58S65340861603164982.pdf</title>
     <style>
-        /* Base setup to remove gaps */
-        html, body { 
-            margin: 0; padding: 0; height: 100%; width: 100%; 
-            background-color: #525659; 
-            font-family: 'Segoe UI', sans-serif;
-            overflow: hidden; /* Prevents the whole page from bouncing */
+        /* Exact Chrome PDF Colors */
+        :root {
+            --header-bg: #323639;
+            --viewer-bg: #525659;
+            --text-gray: #bdc1c6;
         }
 
-        /* Fixed Top Bar - Standardized height and alignment */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            background-color: var(--viewer-bg);
+            font-family: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+            overflow: hidden; 
+        }
+
+        /* Fixed Top Bar - Perfect Alignment */
         .pdf-header {
             height: 48px;
-            background-color: #323639;
+            background-color: var(--header-bg);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 16px;
             color: white;
-            position: fixed; /* Keeps header at top */
+            position: fixed;
             top: 0; width: 100%;
             box-sizing: border-box;
             z-index: 1000;
+            user-select: none;
         }
 
-        .file-info { display: flex; align-items: center; gap: 12px; font-size: 14px; }
-        .controls { display: flex; align-items: center; gap: 15px; font-size: 13px; color: #bdc1c6; }
+        .left-side { display: flex; align-items: center; gap: 18px; font-size: 14px; font-weight: 500; }
+        .right-side { display: flex; align-items: center; gap: 24px; }
+        
+        /* Interactive Buttons with Hand Cursor */
+        .icon-btn { 
+            cursor: pointer; 
+            padding: 8px; 
+            border-radius: 50%;
+            transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .icon-btn:hover { background-color: rgba(255,255,255,0.1); }
 
-        /* The Scrolling Area - This is where the scroll fix happens */
+        .page-ctrl { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--text-gray); }
+
+        /* Sidebar Toggle (The "side panel" you mentioned) */
+        .side-toggle { font-size: 18px; cursor: pointer; }
+
+        /* The Scrolling Area - No Gaps */
         .viewport {
             position: absolute;
-            top: 48px; /* Starts exactly where header ends */
+            top: 48px; /* Locked to header */
             bottom: 0;
             width: 100%;
-            overflow-y: auto; /* Restores vertical scrolling */
+            overflow-y: overlay; /* Chrome-style overlay scroll */
             display: flex;
             flex-direction: column;
             align-items: center;
-            -webkit-overflow-scrolling: touch; /* Smooth scroll for mobile */
+            scroll-behavior: smooth;
         }
 
-        /* The Certificate Image - Positioning and Scaling */
-        .cert-wrapper {
-            padding: 20px 0; /* Space at very top and bottom of the "paper" */
+        /* Certificate Container */
+        .cert-canvas {
+            padding: 24px 0; /* Standard PDF margin */
             width: 100%;
             display: flex;
             justify-content: center;
         }
 
         img {
-            width: 90%; /* Standard PDF view width */
-            max-width: 1000px; /* Limits size on ultra-wide screens */
+            width: 90%;
+            max-width: 880px; /* Precise A4 width at 100% zoom */
             height: auto;
             background: white;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
             border: 1px solid #111;
+            display: block;
         }
 
-        /* Scrollbar styling for Chrome/Edge */
-        .viewport::-webkit-scrollbar { width: 8px; }
-        .viewport::-webkit-scrollbar-track { background: #525659; }
-        .viewport::-webkit-scrollbar-thumb { background: #323639; border-radius: 4px; }
+        /* Custom Scrollbar to match Chrome */
+        .viewport::-webkit-scrollbar { width: 12px; }
+        .viewport::-webkit-scrollbar-track { background: var(--viewer-bg); }
+        .viewport::-webkit-scrollbar-thumb { 
+            background: #787c7f; 
+            border: 3px solid var(--viewer-bg); 
+            border-radius: 10px; 
+        }
     </style>
 </head>
 <body>
 
     <div class="pdf-header">
-        <div class="file-info">
-            <span style="cursor: pointer;">☰</span>
+        <div class="left-side">
+            <div class="side-toggle" title="Thumbnail view">☰</div>
             <span>NOC26CS58S65340861603164982.pdf</span>
         </div>
-        <div class="controls">
-            <span>1 / 1</span>
-            <span>| &nbsp; &minus; &nbsp; 100% &nbsp; + &nbsp; |</span>
-            <span style="letter-spacing: 5px; cursor: pointer;">⟳ ⬇ ⎙</span>
+        
+        <div class="page-ctrl">
+            <span class="icon-btn">−</span>
+            <span>100%</span>
+            <span class="icon-btn">+</span>
+        </div>
+
+        <div class="right-side">
+            <span class="icon-btn" title="Rotate">⟳</span>
+            <span class="icon-btn" title="Download">⬇</span>
+            <span class="icon-btn" title="Print">⎙</span>
         </div>
     </div>
 
     <div class="viewport">
-        <div class="cert-wrapper">
-            <img src="preview%201.jpeg" alt="e-Certificate Content">
+        <div class="cert-canvas">
+            <img src="preview%201.jpeg" alt="PDF Content">
         </div>
     </div>
 
