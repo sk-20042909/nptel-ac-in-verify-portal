@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOC26CS58S65340861603164982.pdf</title>
     <style>
-        /* PDF Viewer Styling */
-        body, html { 
+        /* Base setup to remove gaps */
+        html, body { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
-            background-color: #525659; /* Chrome PDF dark gray */
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            overflow: hidden; /* Prevents double scrollbars */
+            background-color: #525659; 
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden; /* Prevents the whole page from bouncing */
         }
 
-        /* Mock Chrome PDF Top Bar */
+        /* Fixed Top Bar - Standardized height and alignment */
         .pdf-header {
             height: 48px;
             background-color: #323639;
@@ -22,50 +22,69 @@
             justify-content: space-between;
             padding: 0 16px;
             color: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-            z-index: 100;
+            position: fixed; /* Keeps header at top */
+            top: 0; width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
         }
 
-        .file-info { font-size: 14px; display: flex; align-items: center; gap: 15px; }
-        .controls { display: flex; align-items: center; gap: 20px; font-size: 13px; color: #bdc1c6; }
+        .file-info { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+        .controls { display: flex; align-items: center; gap: 15px; font-size: 13px; color: #bdc1c6; }
 
-        /* Certificate Container */
+        /* The Scrolling Area - This is where the scroll fix happens */
         .viewport {
-            height: calc(100vh - 48px);
-            overflow-y: auto;
+            position: absolute;
+            top: 48px; /* Starts exactly where header ends */
+            bottom: 0;
+            width: 100%;
+            overflow-y: auto; /* Restores vertical scrolling */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll for mobile */
+        }
+
+        /* The Certificate Image - Positioning and Scaling */
+        .cert-wrapper {
+            padding: 20px 0; /* Space at very top and bottom of the "paper" */
+            width: 100%;
             display: flex;
             justify-content: center;
-            padding: 20px 0; /* Space at top/bottom of the "paper" only */
         }
 
         img {
-            width: 95%;
-            max-width: 850px; /* Standard PDF width */
+            width: 90%; /* Standard PDF view width */
+            max-width: 1000px; /* Limits size on ultra-wide screens */
+            height: auto;
             background: white;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            display: block;
+            border: 1px solid #111;
         }
 
-        /* Hide scrollbar for a cleaner mobile look */
-        .viewport::-webkit-scrollbar { width: 0px; background: transparent; }
+        /* Scrollbar styling for Chrome/Edge */
+        .viewport::-webkit-scrollbar { width: 8px; }
+        .viewport::-webkit-scrollbar-track { background: #525659; }
+        .viewport::-webkit-scrollbar-thumb { background: #323639; border-radius: 4px; }
     </style>
 </head>
 <body>
 
     <div class="pdf-header">
         <div class="file-info">
-            <span style="font-size: 18px;">☰</span>
+            <span style="cursor: pointer;">☰</span>
             <span>NOC26CS58S65340861603164982.pdf</span>
         </div>
         <div class="controls">
             <span>1 / 1</span>
-            <span>| — 100% + |</span>
-            <span>⟳ ⬇ ⎙</span>
+            <span>| &nbsp; &minus; &nbsp; 100% &nbsp; + &nbsp; |</span>
+            <span style="letter-spacing: 5px; cursor: pointer;">⟳ ⬇ ⎙</span>
         </div>
     </div>
 
     <div class="viewport">
-        <img src="preview%201.jpeg" alt="Certificate">
+        <div class="cert-wrapper">
+            <img src="preview%201.jpeg" alt="e-Certificate Content">
+        </div>
     </div>
 
 </body>
